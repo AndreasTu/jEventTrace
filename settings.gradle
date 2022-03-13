@@ -1,0 +1,11 @@
+rootProject.name = "jEventTrace"
+
+include ":subprojects:jEventTrace-api"
+include ":subprojects:jEventTrace-impl"
+include ":subprojects:test-appl"
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}

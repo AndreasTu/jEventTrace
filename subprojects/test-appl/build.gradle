@@ -1,0 +1,16 @@
+plugins {
+    id 'application'
+}
+
+dependencies {
+    implementation project(":subprojects:jEventTrace-api")
+    runtimeOnly project(":subprojects:jEventTrace-impl")
+}
+
+
+application {
+    it.applicationDefaultJvmArgs.add("-Dcom.github.jeventtrace.enabled=true")
+}
+run {
+    it.jvmArgs.add("-Dcom.github.jeventtrace.enabled=true")
+}

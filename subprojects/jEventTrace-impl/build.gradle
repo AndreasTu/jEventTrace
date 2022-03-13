@@ -1,0 +1,11 @@
+dependencies {
+    implementation project(":subprojects:jEventTrace-api")
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.36'
+
+    testImplementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
+}
+
+
+tasks.named("test", Test).configure {
+    it.systemProperty("com.github.jeventtrace.enabled", "true")
+}
