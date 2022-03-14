@@ -9,7 +9,6 @@ version = "0.1-SNAPSHOT"
 subprojects {
     project.apply plugin: "java"
     project.apply plugin: "groovy"
-    project.apply plugin: "publishing"
     project.apply plugin: "com.github.spotbugs"
 
     group = "com.github.jeventtrace"
@@ -27,7 +26,7 @@ subprojects {
     project.dependencies {
         compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
         compileOnly group: 'com.github.spotbugs', name: 'spotbugs-annotations', version: '4.6.0'
-        
+
         testImplementation group: 'org.codehaus.groovy', name: 'groovy', version: '3.0.10'
         testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.1-groovy-3.0'
         testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-engine', version: '1.8.2'

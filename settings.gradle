@@ -1,8 +1,10 @@
 rootProject.name = "jEventTrace"
 
-include ":subprojects:jEventTrace-api"
-include ":subprojects:jEventTrace-impl"
-include ":subprojects:test-appl"
+
+file('subprojects').eachDir { dir ->
+    include dir.name
+    project(":${dir.name}").projectDir = dir
+}
 
 dependencyResolutionManagement {
     repositories {
