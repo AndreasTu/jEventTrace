@@ -9,7 +9,7 @@ import java.util.List;
 
 @ThreadSafe
 public class EventLog {
-    private static int EVENT_LIST_SIZE = 1024;
+    private static final int EVENT_LIST_SIZE = 1024;
     private final long startTick;
 
     private final List<ITraceEvent> events = new ArrayList<>(EVENT_LIST_SIZE);
