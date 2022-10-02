@@ -4,3 +4,6 @@
 /gradle.xml
 /jarRepositories.xml
 /msic.xml
+/sonarlint
+/checkstyle-idea.xml
+/codeStyles

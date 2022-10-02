@@ -1,5 +1,9 @@
+plugins {
+    id 'maven-publish'
+}
+
 dependencies {
-    implementation project(":subprojects:jEventTrace-api")
+    implementation project(":jEventTrace-api")
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.3'
 
     testImplementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
@@ -8,4 +12,13 @@ dependencies {
 
 tasks.named("test", Test).configure {
     it.systemProperty("com.github.jeventtrace.enabled", "true")
+}
+
+
+publishing {
+    publications {
+        pluginMaven(MavenPublication) {
+            from components.java
+        }
+    }
 }

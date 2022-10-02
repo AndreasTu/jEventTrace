@@ -27,7 +27,7 @@ final class NoOpEventTracer implements IEventTracer {
 
     @Override
     public void eventDuration(String name, Runnable action) {
-
+        action.run();
     }
 
     @Override
