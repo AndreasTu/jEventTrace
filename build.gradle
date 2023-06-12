@@ -4,7 +4,7 @@ plugins {
 
 }
 
-version = "0.1-SNAPSHOT"
+version = "1.0.1"
 
 subprojects {
     project.apply plugin: "java"
@@ -22,6 +22,24 @@ subprojects {
 
     tasks.withType(Test).configureEach {
         useJUnitPlatform()
+    }
+
+    tasks.named("jar", Jar).configure {
+        it.setPreserveFileTimestamps(false)
+        it.setReproducibleFileOrder(true)
+        manifest{
+            attributes(
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor": "Andreas Turban",
+            )
+        }
+    }
+
+    tasks.named("processResources", ProcessResources).configure {
+        from(rootProject.file("LICENSE")){
+            into("META-INF")
+        }
     }
 
     project.dependencies {
