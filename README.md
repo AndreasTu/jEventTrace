@@ -17,6 +17,11 @@ This is a very early stage project. It is currently only a proof of concept.
 The project requires at least Java 17 to build and run. Also, the project using the `jEventTrace` library requires at
 least Java 17.
 
+
+## Usage
+
+You can use jEventTrace via [jitpack.io](https://jitpack.io/#AndreasTu/jEventTrace).
+
 ## Contributors
 
 * Creator:
