@@ -12,7 +12,7 @@ subprojects {
     project.apply plugin: "publishing"
     project.apply plugin: "com.github.spotbugs"
 
-    group = "com.github.AndreasTu"
+    group = "com.github.AndreasTu.jEventTrace"
     version = rootProject.version
 
     tasks.withType(JavaCompile).configureEach {
