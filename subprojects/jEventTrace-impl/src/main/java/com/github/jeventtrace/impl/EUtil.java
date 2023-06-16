@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.github.jeventtrace.impl;
 
+import javax.annotation.processing.Generated;
 import java.io.IOException;
 import java.io.Writer;
 
 public final class EUtil {
+
+    @Generated("jacoco exclude")
     private EUtil() {
 
     }
@@ -25,7 +28,10 @@ public final class EUtil {
     }
 
     public static void writeStringEscaped(Writer w, String value) throws IOException {
-        //FIXME: Implement json escape
-        w.write(value);
+        if (value.contains("\"")) {
+            w.write(value.replace("\"", "\\\""));
+        } else {
+            w.write(value);
+        }
     }
 }
