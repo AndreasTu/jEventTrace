@@ -1,10 +1,6 @@
-plugins{
+plugins {
     id 'maven-publish'
 }
-dependencies{
-
-}
-
 
 publishing {
     publications {

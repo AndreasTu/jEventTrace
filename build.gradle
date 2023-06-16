@@ -1,10 +1,10 @@
 plugins {
     id 'base'
     id 'com.github.spotbugs' version '5.0.14' apply false
-
+    id 'com.github.ben-manes.versions' version '0.47.0'
 }
 
-version = "1.0.2"
+version = "1.0.3-SNAPSHOT"
 
 subprojects {
     project.apply plugin: "java"
@@ -27,7 +27,7 @@ subprojects {
     tasks.named("jar", Jar).configure {
         it.setPreserveFileTimestamps(false)
         it.setReproducibleFileOrder(true)
-        manifest{
+        manifest {
             attributes(
                 "Implementation-Title": project.name,
                 "Implementation-Version": project.version,
@@ -37,18 +37,20 @@ subprojects {
     }
 
     tasks.named("processResources", ProcessResources).configure {
-        from(rootProject.file("LICENSE")){
+        from(rootProject.file("LICENSE")) {
             into("META-INF")
         }
     }
 
     project.dependencies {
-        compileOnly group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
-        compileOnly group: 'com.github.spotbugs', name: 'spotbugs-annotations', version: '4.7.3'
+        compileOnly libs.googleFindbugsAnno
+        compileOnly libs.spotBugsAnno
 
-        testImplementation group: 'org.apache.groovy', name: 'groovy', version: '4.0.12'
-        testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.3-groovy-4.0'
-        testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-engine', version: '1.9.3'
+        testImplementation libs.groovy
+        testImplementation(libs.spockCore) {
+            exclude module: "groovy"
+        }
+        testRuntimeOnly libs.junitPlatform
     }
 
     tasks.named("spotbugsTest").configure {

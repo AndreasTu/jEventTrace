@@ -1,0 +1,17 @@
+[versions]
+
+[libraries]
+# Utils
+guava = { module = "com.google.guava:guava", version = "31.1-jre" }
+
+# Logging
+slf4j = { module = "org.slf4j:slf4j-api", version = "2.0.3" }
+
+# Annotations
+googleFindbugsAnno = { module = "com.google.code.findbugs:jsr305", version = "3.0.2" }
+spotBugsAnno = { module = "com.github.spotbugs:spotbugs-annotations", version = "4.7.3" }
+
+# Testing
+groovy = { module = "org.apache.groovy:groovy", version = "4.0.12" }
+spockCore = { module = "org.spockframework:spock-core", version = "2.3-groovy-4.0" }
+junitPlatform = { module = "org.junit.platform:junit-platform-engine", version = "1.9.3" }

@@ -4,9 +4,9 @@ plugins {
 
 dependencies {
     implementation project(":jEventTrace-api")
-    implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.0.3'
+    implementation libs.slf4j
 
-    testImplementation group: 'com.google.guava', name: 'guava', version: '31.1-jre'
+    testImplementation libs.guava
 }
 
 
