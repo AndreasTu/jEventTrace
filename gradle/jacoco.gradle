@@ -3,6 +3,8 @@ tasks.register("jacocoReport", JacocoReport) {
     description = "Generates code coverage report for the project."
 }
 
+def coverageLimit = 0.98
+
 def jacocoVerification = tasks.register("jacocoCoverageVerification", JacocoCoverageVerification) {
     group = "verification"
     description = " Verifies code coverage metrics for the project."
@@ -11,14 +13,14 @@ def jacocoVerification = tasks.register("jacocoCoverageVerification", JacocoCove
             element('PACKAGE')
             limit {
                 counter = 'LINE'
-                minimum = 0.8
+                minimum = coverageLimit
             }
         }
         rule {
             element('PACKAGE')
             limit {
                 counter = 'BRANCH'
-                minimum = 0.8
+                minimum = coverageLimit
             }
         }
     }

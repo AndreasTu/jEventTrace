@@ -8,6 +8,7 @@ dependencies {
     implementation libs.slf4j
 
     testImplementation libs.guava
+    testImplementation libs.gson
 }
 
 

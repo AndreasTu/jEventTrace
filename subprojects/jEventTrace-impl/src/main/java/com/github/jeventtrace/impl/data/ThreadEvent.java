@@ -30,10 +30,12 @@ public final class ThreadEvent implements ITraceEvent {
 
     @Override
     public void write(Writer writer) throws IOException {
-        writer.write("{\"name\":\"thread_name\",\"ph\":\"M\",\"pid\":");
+        writer.write("{\"name\":\"thread_name\",\"ph\":\"");
+        writeStringEscaped(writer, getType().getTag());
+        writer.write("\",\"pid\":");
         writeLong(writer, PID);
         writer.write(",\"tid\":");
-        writeLong(writer, tid);
+        writeLong(writer, getTid());
         writer.write(",\"args\":{\"name\":\"");
         writeStringEscaped(writer, threadName);
         writer.write("\"}}");

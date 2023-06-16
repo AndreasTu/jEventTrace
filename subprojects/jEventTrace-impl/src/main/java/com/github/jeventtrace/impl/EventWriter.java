@@ -30,7 +30,7 @@ final class EventWriter {
             writer.write("\n]}");
             writer.flush();
         } catch (IOException ex) {
-            throw new UncheckedIOException(ex);
+            throw new UncheckedIOException("Failed to write jEventTrace data to file '" + file.toAbsolutePath() + "'.", ex);
         }
     }
 }

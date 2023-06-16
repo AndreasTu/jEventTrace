@@ -70,6 +70,9 @@ public class EventTracer implements IEventTracerInternal {
         new EventWriter().write(file, eventLog);
     }
 
+    EventLog getEventLog() {
+        return eventLog;
+    }
 
     @Override
     public String toString() {

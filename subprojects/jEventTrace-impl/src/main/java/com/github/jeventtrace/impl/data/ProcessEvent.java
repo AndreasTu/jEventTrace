@@ -30,7 +30,9 @@ public final class ProcessEvent implements ITraceEvent {
 
     @Override
     public void write(Writer writer) throws IOException {
-        writer.write("{\"name\":\"process_name\",\"ph\":\"M\",\"pid\":");
+        writer.write("{\"name\":\"process_name\",\"ph\":\"");
+        writeStringEscaped(writer, getType().getTag());
+        writer.write("\",\"pid\":");
         writeLong(writer, PID);
         writer.write(",\"args\":{\"name\":\"");
         writeStringEscaped(writer, processName);
