@@ -1,0 +1,60 @@
+tasks.register("jacocoReport", JacocoReport) {
+    group = "verification"
+    description = "Generates code coverage report for the project."
+}
+
+def jacocoVerification = tasks.register("jacocoCoverageVerification", JacocoCoverageVerification) {
+    group = "verification"
+    description = " Verifies code coverage metrics for the project."
+    violationRules {
+        rule {
+            element('PACKAGE')
+            limit {
+                counter = 'LINE'
+                minimum = 0.8
+            }
+        }
+        rule {
+            element('PACKAGE')
+            limit {
+                counter = 'BRANCH'
+                minimum = 0.8
+            }
+        }
+    }
+}
+
+def rootReports = tasks.withType(JacocoReportBase)
+
+tasks.named("check").configure {
+    dependsOn(jacocoVerification)
+}
+
+allprojects { Project p ->
+    p.plugins.withId("jacoco") {
+        jacoco {
+            toolVersion = libs.versions.jacoco.get()
+        }
+        p.plugins.withId("java") {
+            def testTasks = p.tasks.withType(Test)
+            rootReports.configureEach { report ->
+                report.dependsOn(testTasks)
+                report.sourceSets(p.sourceSets.main)
+            }
+            tasks.named("jacocoTestCoverageVerification").configure {
+                group = null
+                enabled = false
+            }
+            tasks.named("jacocoTestReport").configure {
+                group = null
+                enabled = false
+            }
+            testTasks.configureEach { t ->
+                rootReports.configureEach {
+                    it.executionData(t)
+                }
+            }
+        }
+    }
+}
+

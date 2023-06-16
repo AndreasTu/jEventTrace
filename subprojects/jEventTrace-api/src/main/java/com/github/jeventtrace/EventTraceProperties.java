@@ -3,6 +3,7 @@ package com.github.jeventtrace;
 
 
 import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.processing.Generated;
 
 /**
  * {@link EventTraceProperties} defines the set of System Properties used to control the JEventTrace behavior.
@@ -14,4 +15,9 @@ public final class EventTraceProperties {
      * Enables the tracer for the process.
      */
     public static final String ENABLED = PREFIX + "enabled";
+
+    @Generated("jacoco exclude")
+    private EventTraceProperties() {
+
+    }
 }

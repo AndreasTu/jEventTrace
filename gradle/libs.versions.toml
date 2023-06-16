@@ -1,4 +1,5 @@
 [versions]
+jacoco = "0.8.10"
 
 [libraries]
 # Utils

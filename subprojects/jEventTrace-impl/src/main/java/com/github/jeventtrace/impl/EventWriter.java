@@ -9,9 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Iterator;
 
-public class EventWriter {
+final class EventWriter {
 
     EventWriter() {
 
@@ -20,7 +19,7 @@ public class EventWriter {
     void write(Path file, EventLog events) {
         try (var writer = Files.newBufferedWriter(file, StandardCharsets.UTF_8, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)) {
             writer.write("{\"traceEvents\":[\n");
-            Iterator<ITraceEvent> it = events.getEvents().iterator();
+            var it = events.getEvents().iterator();
             while (it.hasNext()) {
                 ITraceEvent event = it.next();
                 event.write(writer);

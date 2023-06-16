@@ -5,6 +5,7 @@ package com.github.jeventtrace;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import javax.annotation.concurrent.ThreadSafe;
+import javax.annotation.processing.Generated;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.Callable;
 import java.util.logging.Level;
@@ -22,16 +23,27 @@ public final class EventTrace {
     }
 
     private static IEventTracer lookupEventTracer() {
+        return tryLoadEventTracerFromClass("com.github.jeventtrace.impl.EventTracer");
+    }
+
+    //Visible for testing
+    static IEventTracer tryLoadEventTracerFromClass(String className) {
         try {
-            Class<?> implClass = EventTrace.class.getClassLoader().loadClass("com.github.jeventtrace.impl.EventTracer");
+            Class<?> implClass = EventTrace.class.getClassLoader().loadClass(className);
             IEventTracerInternal tracer = (IEventTracerInternal) implClass.getConstructor().newInstance();
             return tracer.initTracer(NoOpEventTracer.INSTANCE);
-        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException | ClassCastException ex) {
+        } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException |
+                 ClassCastException ex) {
             Logger.getLogger(EventTrace.class.getName()).log(Level.SEVERE, "Failed to initialize jEventTrace.", ex);
             return NoOpEventTracer.INSTANCE;
         } catch (ClassNotFoundException ex) {
             return NoOpEventTracer.INSTANCE;
         }
+    }
+
+    @Generated("jacoco exclude")
+    private EventTrace() {
+
     }
 
     @SuppressFBWarnings("MS")
